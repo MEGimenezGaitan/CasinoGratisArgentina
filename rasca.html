@@ -69,7 +69,7 @@ button {
 
 <script>
 
-let premiosBase = ["$0", "$0", "$10", "$20", "$50", "$100", "💥 JACKPOT"];
+let premiosBase = ["$0", "$0", "$10", "$20", "$50", "$100", "$0", "$0", "💥 JACKPOT"];
 let cartas = [];
 let descubiertas = 0;
 let juegoTerminado = false;
@@ -139,7 +139,7 @@ function evaluarResultado() {
     }
   });
 
-  if (jackpot) return "💥 JACKPOT";
+  if (jackpot) return "$1000 💥 JACKPOT";
   return "$" + total;
 }
 
