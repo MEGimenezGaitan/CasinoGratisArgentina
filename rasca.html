@@ -96,7 +96,7 @@ function iniciarJuego() {
   document.getElementById("resultado").innerText = "";
   document.getElementById("cta").style.display = "none";
 
-  cartas.forEach((premio, index) => {
+  cartas.forEach((premio) => {
     let div = document.createElement("div");
     div.className = "card";
     div.innerText = "?";
@@ -111,7 +111,7 @@ function iniciarJuego() {
         juegoTerminado = true;
 
         let resultado = evaluarResultado();
-        document.getElementById("resultado").innerText = "Resultado: " + resultado;
+        document.getElementById("resultado").innerText = "Ganaste: " + resultado;
 
         document.getElementById("cta").style.display = "block";
       }
@@ -123,20 +123,24 @@ function iniciarJuego() {
 
 function evaluarResultado() {
   let visibles = [];
+
   document.querySelectorAll(".card").forEach(c => {
     if (c.innerText !== "?") visibles.push(c.innerText);
   });
 
-  let conteo = {};
-  visibles.forEach(v => conteo[v] = (conteo[v] || 0) + 1);
+  let total = 0;
+  let jackpot = false;
 
-  for (let premio in conteo) {
-    if (conteo[premio] >= 2) {
-      return premio;
+  visibles.forEach(v => {
+    if (v.includes("JACKPOT")) {
+      jackpot = true;
+    } else {
+      total += parseInt(v.replace("$", "")) || 0;
     }
-  }
+  });
 
-  return "$0";
+  if (jackpot) return "💥 JACKPOT";
+  return "$" + total;
 }
 
 function reiniciar() {
