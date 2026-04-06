@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Rasca y Gana</title>
+
 <style>
 body {
   font-family: Arial;
   text-align: center;
-  background: #111;
+  background: #0f172a;
   color: white;
 }
 
@@ -22,15 +23,32 @@ body {
 .card {
   width: 100px;
   height: 100px;
-  background: gray;
+  background: #64748b;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  background: #94a3b8;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
 }
 </style>
 </head>
+
 <body>
 
 <h1>🎟️ Rasca y Gana</h1>
@@ -40,29 +58,94 @@ body {
 
 <p id="resultado"></p>
 
-<p>👉 ¿Querés jugar con dinero real?</p>
-<button onclick="window.location.href='#'">
-Ver mejores casinos
-</button>
+<div id="cta" style="display:none;">
+  <p>👉 ¿Querés jugar con dinero real?</p>
+  <a href="casinos.html">
+    <button>Ver mejores casinos</button>
+  </a>
+</div>
+
+<button onclick="reiniciar()">Jugar de nuevo</button>
 
 <script>
-let premios = ["$0", "$10", "$50", "$100", "💥 JACKPOT"];
-let ganador = premios[Math.floor(Math.random() * premios.length)];
 
-let grid = document.getElementById("grid");
+let premiosBase = ["$0", "$0", "$10", "$20", "$50", "$100", "💥 JACKPOT"];
+let cartas = [];
+let descubiertas = 0;
+let juegoTerminado = false;
 
-for (let i = 0; i < 9; i++) {
-  let div = document.createElement("div");
-  div.className = "card";
-  div.innerText = "?";
-
-  div.onclick = function () {
-    this.innerText = ganador;
-    document.getElementById("resultado").innerText = "Resultado: " + ganador;
-  };
-
-  grid.appendChild(div);
+function mezclar(array) {
+  return array.sort(() => Math.random() - 0.5);
 }
+
+function iniciarJuego() {
+  let premios = [];
+
+  // Generar 9 cartas con premios variados
+  for (let i = 0; i < 9; i++) {
+    premios.push(premiosBase[Math.floor(Math.random() * premiosBase.length)]);
+  }
+
+  cartas = mezclar(premios);
+
+  let grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  descubiertas = 0;
+  juegoTerminado = false;
+  document.getElementById("resultado").innerText = "";
+  document.getElementById("cta").style.display = "none";
+
+  cartas.forEach((premio, index) => {
+    let div = document.createElement("div");
+    div.className = "card";
+    div.innerText = "?";
+
+    div.onclick = function () {
+      if (juegoTerminado || this.innerText !== "?") return;
+
+      this.innerText = premio;
+      descubiertas++;
+
+      if (descubiertas === 3) {
+        juegoTerminado = true;
+
+        let resultado = evaluarResultado();
+        document.getElementById("resultado").innerText = "Resultado: " + resultado;
+
+        document.getElementById("cta").style.display = "block";
+      }
+    };
+
+    grid.appendChild(div);
+  });
+}
+
+function evaluarResultado() {
+  let visibles = [];
+  document.querySelectorAll(".card").forEach(c => {
+    if (c.innerText !== "?") visibles.push(c.innerText);
+  });
+
+  let conteo = {};
+  visibles.forEach(v => conteo[v] = (conteo[v] || 0) + 1);
+
+  for (let premio in conteo) {
+    if (conteo[premio] >= 2) {
+      return premio;
+    }
+  }
+
+  return "$0";
+}
+
+function reiniciar() {
+  iniciarJuego();
+}
+
+// iniciar al cargar
+iniciarJuego();
+
 </script>
 
 </body>
