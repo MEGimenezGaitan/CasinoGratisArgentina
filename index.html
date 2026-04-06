@@ -6,17 +6,26 @@
 <title>Casino Gratis Argentina | Juegos y Bonos</title>
 
 <style>
+
+/* ===== BODY ===== */
 body {
   margin: 0;
   font-family: Arial;
-  background: #0f172a;
+  background: radial-gradient(circle, #020617, #0f172a);
   color: white;
 }
 
+/* ===== HEADER ===== */
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
   background: #020617;
-  padding: 15px;
-  text-align: center;
+}
+
+header h1 {
+  margin: 0;
 }
 
 nav a {
@@ -26,11 +35,17 @@ nav a {
   font-weight: bold;
 }
 
+nav a:hover {
+  color: #22c55e;
+}
+
+/* ===== SECCIONES ===== */
 .section {
-  padding: 30px;
+  padding: 40px 20px;
   text-align: center;
 }
 
+/* ===== CARDS ===== */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -42,92 +57,124 @@ nav a {
   background: #1e293b;
   padding: 20px;
   border-radius: 10px;
-  width: 200px;
+  width: 220px;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(34,197,94,0.6);
+}
+
+/* ===== BOTONES ===== */
 button {
   padding: 10px;
   border: none;
-  background: #22c55e;
+  background: linear-gradient(45deg, #22c55e, #16a34a);
   color: white;
   cursor: pointer;
   border-radius: 5px;
+  width: 100%;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
+button:hover {
+  opacity: 0.9;
+}
+
+/* ===== FOOTER ===== */
 footer {
   background: #020617;
   padding: 20px;
   text-align: center;
   font-size: 12px;
+  margin-top: 40px;
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
-  <h1>🎰 Casino Gratis Argentina</h1>
+  <h1>🎰 Casino Gratis AR</h1>
   <nav>
-    <a href="#">Juegos</a>
+    <a href="index.html">Inicio</a>
     <a href="casinos.html">Casinos</a>
     <a href="#">Blog</a>
   </nav>
 </header>
 
+<!-- JUEGOS -->
 <div class="section">
   <h2>🔥 Jugá Gratis</h2>
+
   <div class="cards">
+
     <div class="card">
       <h3>Ruleta</h3>
       <p>Probá suerte girando la ruleta</p>
       <a href="ruleta.html"><button>Jugar</button></a>
-      <p>👉 ¿Querés jugar con dinero real?</p>
-      <a href="casinos.html">
-        <button>Ver mejores casinos</button>
-      </a>
+
+      <p style="margin-top:15px;">👉 ¿Querés jugar con dinero real?</p>
+      <a href="casinos.html"><button>Ver mejores casinos</button></a>
     </div>
+
     <div class="card">
       <h3>Rasca y Gana</h3>
       <p>Descubrí premios ocultos</p>
       <a href="rasca.html"><button>Jugar</button></a>
-      <p>👉 ¿Querés jugar con dinero real?</p>
-      <a href="casinos.html">
-        <button>Ver mejores casinos</button>
-      </a>
+
+      <p style="margin-top:15px;">👉 ¿Querés jugar con dinero real?</p>
+      <a href="casinos.html"><button>Ver mejores casinos</button></a>
     </div>
+
     <div class="card">
       <h3>Slots Demo</h3>
-      <p>Simulación tipo Pragmatic</p>
+      <p>Simulación estilo tragamonedas</p>
       <button>Próximamente</button>
+
+      <p style="margin-top:15px;">👉 ¿Querés jugar con dinero real?</p>
+      <a href="casinos.html"><button>Ver mejores casinos</button></a>
     </div>
+
   </div>
 </div>
 
+<!-- CASINOS -->
 <div class="section">
   <h2>💰 Mejores Casinos Online</h2>
 
   <div class="cards">
+
     <div class="card">
-      <h3>Casino X</h3>
-      <p>Bono 100% hasta $100.000</p>
+      <h3>🏆 Casino Recomendado</h3>
+      <p>🎁 Bono 100% hasta $100.000</p>
+      <p>⭐⭐⭐⭐⭐</p>
       <a href="casinos.html"><button>Jugar ahora</button></a>
     </div>
 
     <div class="card">
-      <h3>Casino Y</h3>
-      <p>Bono 200% + Free Spins</p>
+      <h3>🔥 Casino Popular</h3>
+      <p>🎁 Bono 200% + Free Spins</p>
+      <p>⭐⭐⭐⭐</p>
       <a href="casinos.html"><button>Jugar ahora</button></a>
     </div>
+
   </div>
 </div>
 
+<!-- GUIAS -->
 <div class="section">
   <h2>🧠 Guías</h2>
-  <p>Próximamente estrategias y consejos para ganar</p>
+  <p>Próximamente estrategias, tips y mejores slots estilo Pragmatic Play</p>
 </div>
 
+<!-- FOOTER -->
 <footer>
-  <p>+18 | Juego responsable</p>
+  <p>+18 | Juego responsable | Este sitio es solo entretenimiento</p>
 </footer>
 
 </body>
