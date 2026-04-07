@@ -2,53 +2,77 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Slots Gratis</title>
+<title>Slots PRO</title>
 
 <style>
 body {
+  margin: 0;
   font-family: Arial;
   text-align: center;
-  background: #0f172a;
+  background: radial-gradient(circle,#020617,#0f172a);
   color: white;
 }
 
-.slot {
+/* CONTENEDOR */
+.slot-machine {
+  background: #111827;
+  border-radius: 20px;
+  padding: 20px;
+  width: 320px;
+  margin: 40px auto;
+  box-shadow: 0 0 25px rgba(0,0,0,0.8);
+}
+
+/* REELS */
+.reels {
   display: flex;
   justify-content: center;
-  margin: 30px;
+  gap: 10px;
 }
 
 .reel {
   width: 80px;
-  height: 80px;
-  background: #1e293b;
-  margin: 5px;
-  font-size: 40px;
+  height: 120px;
+  overflow: hidden;
+  background: black;
+  border-radius: 10px;
+  border: 3px solid #22c55e;
+}
+
+.reel-inner {
+  display: flex;
+  flex-direction: column;
+  transition: transform 1s ease-out;
+}
+
+.symbol {
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  border: 2px solid #334155;
-  transition: 0.2s;
+  font-size: 40px;
 }
 
-.spin {
-  animation: spin 0.5s infinite;
-}
-
-@keyframes spin {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
-}
-
+/* BOTÓN */
 button {
-  padding: 12px;
+  margin-top: 20px;
+  padding: 12px 20px;
   background: linear-gradient(45deg,#22c55e,#16a34a);
   border: none;
   color: white;
-  border-radius: 5px;
+  font-size: 18px;
+  border-radius: 8px;
   cursor: pointer;
+}
+
+/* LUCES */
+.win {
+  animation: glow 0.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 10px gold; }
+  to { box-shadow: 0 0 30px gold; }
 }
 
 </style>
@@ -56,18 +80,22 @@ button {
 
 <body>
 
-<h1>🎰 Slot Gratis</h1>
-<p id="creditos">Créditos: 100</p>
+<h1>🎰 Slots PRO</h1>
+<p id="credits">Créditos: 200</p>
 
-<div class="slot">
-  <div class="reel" id="r1">🍒</div>
-  <div class="reel" id="r2">🍋</div>
-  <div class="reel" id="r3">🍊</div>
+<div class="slot-machine">
+
+  <div class="reels">
+    <div class="reel"><div class="reel-inner" id="r1"></div></div>
+    <div class="reel"><div class="reel-inner" id="r2"></div></div>
+    <div class="reel"><div class="reel-inner" id="r3"></div></div>
+  </div>
+
+  <button onclick="spin()">GIRAR</button>
+
 </div>
 
-<button onclick="spin()">Girar</button>
-
-<p id="resultado"></p>
+<p id="result"></p>
 
 <div id="cta" style="display:none;">
   <p>🔥 Probá suerte con dinero real</p>
@@ -78,71 +106,84 @@ button {
 
 <script>
 
-let simbolos = ["🍒","🍋","🍊","⭐","💎"];
-let creditos = 100;
+let symbols = ["🍒","🍋","🍉","⭐","💎","7️⃣"];
+let credits = 200;
 
-function getRandom(){
-  return simbolos[Math.floor(Math.random()*simbolos.length)];
+function createReel(id){
+  let reel = document.getElementById(id);
+  reel.innerHTML = "";
+
+  for(let i=0;i<15;i++){
+    let div = document.createElement("div");
+    div.className = "symbol";
+    div.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+    reel.appendChild(div);
+  }
 }
+
+["r1","r2","r3"].forEach(createReel);
 
 function spin(){
 
-  if(creditos <= 0){
-    document.getElementById("resultado").innerText = "😢 Sin créditos...";
+  if(credits < 20){
+    document.getElementById("result").innerText = "😢 Sin créditos";
     document.getElementById("cta").style.display = "block";
     return;
   }
 
-  creditos -= 10;
-  document.getElementById("creditos").innerText = "Créditos: " + creditos;
+  credits -= 20;
+  document.getElementById("credits").innerText = "Créditos: " + credits;
 
-  let reels = ["r1","r2","r3"];
+  let positions = [];
 
-  reels.forEach(id => {
-    document.getElementById(id).classList.add("spin");
+  ["r1","r2","r3"].forEach((id,i)=>{
+
+    let reel = document.getElementById(id);
+
+    createReel(id);
+
+    let pos = Math.floor(Math.random()*10);
+    positions.push(pos);
+
+    setTimeout(()=>{
+      reel.style.transform = "translateY(-" + (pos * 120) + "px)";
+    }, i * 200);
   });
 
   setTimeout(()=>{
 
-    let r1 = getRandom();
-    let r2 = getRandom();
-    let r3 = getRandom();
+    let r1 = symbols[Math.floor(Math.random()*symbols.length)];
+    let r2 = symbols[Math.floor(Math.random()*symbols.length)];
+    let r3 = symbols[Math.floor(Math.random()*symbols.length)];
 
-    // 💥 efecto casi ganar
-    if(Math.random() < 0.3){
-      r1 = "💎";
-      r2 = "💎";
-      r3 = simbolos[Math.floor(Math.random()*simbolos.length)];
-    }
-
-    document.getElementById("r1").innerText = r1;
-    document.getElementById("r2").innerText = r2;
-    document.getElementById("r3").innerText = r3;
-
-    reels.forEach(id => {
-      document.getElementById(id).classList.remove("spin");
-    });
+    let result = "";
 
     if(r1 === r2 && r2 === r3){
-      document.getElementById("resultado").innerText = "💥 JACKPOT!";
-      creditos += 100;
+      credits += 150;
+      result = "💥 JACKPOT!";
+      document.querySelector(".slot-machine").classList.add("win");
     }
     else if(r1 === r2 || r2 === r3){
-      document.getElementById("resultado").innerText = "💰 Ganaste algo!";
-      creditos += 30;
+      credits += 40;
+      result = "💰 Ganaste";
     }
     else{
-      document.getElementById("resultado").innerText = "😢 Intentalo de nuevo";
+      result = "😢 Intentalo";
     }
 
-    document.getElementById("creditos").innerText = "Créditos: " + creditos;
+    document.getElementById("result").innerText = result;
+    document.getElementById("credits").innerText = "Créditos: " + credits;
 
-    // CTA inteligente
-    if(creditos <= 20){
+    setTimeout(()=>{
+      document.querySelector(".slot-machine").classList.remove("win");
+    },1000);
+
+    if(credits < 50){
       document.getElementById("cta").style.display = "block";
     }
 
-  }, 1200);
+  },2000);
+
 }
 
 </script>
