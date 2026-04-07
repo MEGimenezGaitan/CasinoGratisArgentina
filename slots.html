@@ -2,59 +2,53 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Slots Gratis PRO</title>
+<title>Slots Gratis</title>
 
 <style>
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial;
   text-align: center;
-  background: radial-gradient(circle, #020617, #0f172a);
+  background: #0f172a;
   color: white;
-}
-
-h1 {
-  margin-top: 20px;
 }
 
 .slot {
   display: flex;
   justify-content: center;
-  gap: 15px;
   margin: 30px;
 }
 
 .reel {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   background: #1e293b;
-  border-radius: 10px;
+  margin: 5px;
+  font-size: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 35px;
-  border: 3px solid #22c55e;
-  box-shadow: 0 0 10px rgba(34,197,94,0.5);
+  border-radius: 10px;
+  border: 2px solid #334155;
+  transition: 0.2s;
+}
+
+.spin {
+  animation: spin 0.5s infinite;
+}
+
+@keyframes spin {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
 }
 
 button {
-  padding: 12px 25px;
-  background: linear-gradient(45deg, #22c55e, #16a34a);
+  padding: 12px;
+  background: linear-gradient(45deg,#22c55e,#16a34a);
   border: none;
   color: white;
-  cursor: pointer;
   border-radius: 5px;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-#result {
-  margin-top: 20px;
-  font-size: 20px;
-}
-
-#credits {
-  margin-top: 10px;
-  font-size: 18px;
+  cursor: pointer;
 }
 
 </style>
@@ -62,108 +56,94 @@ button {
 
 <body>
 
-<h1>🎰 Slots PRO</h1>
-
-<p id="credits">Créditos: $500</p>
+<h1>🎰 Slot Gratis</h1>
+<p id="creditos">Créditos: 100</p>
 
 <div class="slot">
-  <div class="reel" id="r1">❓</div>
-  <div class="reel" id="r2">❓</div>
-  <div class="reel" id="r3">❓</div>
+  <div class="reel" id="r1">🍒</div>
+  <div class="reel" id="r2">🍋</div>
+  <div class="reel" id="r3">🍊</div>
 </div>
 
-<button onclick="spin()">Girar ($50)</button>
+<button onclick="spin()">Girar</button>
 
-<p id="result"></p>
+<p id="resultado"></p>
 
 <div id="cta" style="display:none;">
-  <p>👉 ¿Querés jugar con dinero real?</p>
-  <a href="casinos.html">
-    <button>Ver mejores casinos</button>
-  </a>
+  <p>🔥 Probá suerte con dinero real</p>
+  <button onclick="window.location.href='redirect.html'">
+    🎰 Ir al casino
+  </button>
 </div>
 
 <script>
 
-let simbolos = ["🍒","🍋","🍉","⭐","💎","7️⃣"];
-let creditos = 500;
+let simbolos = ["🍒","🍋","🍊","⭐","💎"];
+let creditos = 100;
 
-function actualizarCreditos() {
-  document.getElementById("credits").innerText = "Créditos: $" + creditos;
+function getRandom(){
+  return simbolos[Math.floor(Math.random()*simbolos.length)];
 }
 
-function randomSimbolo() {
-  return simbolos[Math.floor(Math.random() * simbolos.length)];
-}
+function spin(){
 
-function spin() {
-
-  if (creditos < 50) {
-    document.getElementById("result").innerText = "Sin créditos 😢";
+  if(creditos <= 0){
+    document.getElementById("resultado").innerText = "😢 Sin créditos...";
+    document.getElementById("cta").style.display = "block";
     return;
   }
 
-  creditos -= 50;
-  actualizarCreditos();
+  creditos -= 10;
+  document.getElementById("creditos").innerText = "Créditos: " + creditos;
 
-  document.getElementById("cta").style.display = "none";
-  document.getElementById("result").innerText = "";
+  let reels = ["r1","r2","r3"];
 
-  let r1 = document.getElementById("r1");
-  let r2 = document.getElementById("r2");
-  let r3 = document.getElementById("r3");
+  reels.forEach(id => {
+    document.getElementById(id).classList.add("spin");
+  });
 
-  let vueltas = 15;
-  let i = 0;
+  setTimeout(()=>{
 
-  let intervalo = setInterval(() => {
-    r1.innerText = randomSimbolo();
-    r2.innerText = randomSimbolo();
-    r3.innerText = randomSimbolo();
-    i++;
+    let r1 = getRandom();
+    let r2 = getRandom();
+    let r3 = getRandom();
 
-    if (i >= vueltas) {
-      clearInterval(intervalo);
-
-      let s1 = randomSimbolo();
-      let s2 = randomSimbolo();
-      let s3 = randomSimbolo();
-
-      r1.innerText = s1;
-      r2.innerText = s2;
-      r3.innerText = s3;
-
-      evaluar(s1, s2, s3);
+    // 💥 efecto casi ganar
+    if(Math.random() < 0.3){
+      r1 = "💎";
+      r2 = "💎";
+      r3 = simbolos[Math.floor(Math.random()*simbolos.length)];
     }
 
-  }, 80);
-}
+    document.getElementById("r1").innerText = r1;
+    document.getElementById("r2").innerText = r2;
+    document.getElementById("r3").innerText = r3;
 
-function evaluar(a, b, c) {
-  let resultado = "";
+    reels.forEach(id => {
+      document.getElementById(id).classList.remove("spin");
+    });
 
-  if (a === b && b === c) {
-    if (a === "7️⃣") {
-      creditos += 1000;
-      resultado = "💥 JACKPOT +$1000";
-    } else {
-      creditos += 200;
-      resultado = "🎉 Ganaste +$200";
+    if(r1 === r2 && r2 === r3){
+      document.getElementById("resultado").innerText = "💥 JACKPOT!";
+      creditos += 100;
     }
-  } else if (a === b || b === c || a === c) {
-    creditos += 50;
-    resultado = "👍 Recuperaste +$50";
-  } else {
-    resultado = "😢 Perdiste";
-  }
+    else if(r1 === r2 || r2 === r3){
+      document.getElementById("resultado").innerText = "💰 Ganaste algo!";
+      creditos += 30;
+    }
+    else{
+      document.getElementById("resultado").innerText = "😢 Intentalo de nuevo";
+    }
 
-  actualizarCreditos();
-  document.getElementById("result").innerText = resultado;
-  document.getElementById("cta").style.display = "block";
+    document.getElementById("creditos").innerText = "Créditos: " + creditos;
+
+    // CTA inteligente
+    if(creditos <= 20){
+      document.getElementById("cta").style.display = "block";
+    }
+
+  }, 1200);
 }
-
-// inicial
-actualizarCreditos();
 
 </script>
 
