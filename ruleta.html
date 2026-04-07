@@ -1,81 +1,47 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Ruleta Gratis</title>
-
 <style>
-body {
-  font-family: Arial;
-  text-align: center;
-  background: #0f172a;
-  color: white;
-}
-
 #wheel {
-  margin: 30px auto;
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  border: 6px solid white;
+  margin: 30px auto;
   background: conic-gradient(
-    #22c55e 0deg 60deg,
-    #ef4444 60deg 120deg,
-    #22c55e 120deg 180deg,
-    #ef4444 180deg 240deg,
-    #22c55e 240deg 300deg,
-    #facc15 300deg 360deg
+    red 0deg 60deg,
+    green 60deg 120deg,
+    red 120deg 180deg,
+    green 180deg 240deg,
+    red 240deg 300deg,
+    gold 300deg 360deg
   );
-  transition: transform 2s ease-out;
+  transition: 2s;
 }
-
-button {
-  padding: 10px 20px;
-  background: linear-gradient(45deg, #22c55e, #16a34a);
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
 </style>
 </head>
 
 <body>
 
-<h1>🎰 Ruleta Gratis</h1>
-<div style="font-size:30px;">⬇️</div>
+<h1>Ruleta</h1>
+<div>⬇️</div>
 <div id="wheel"></div>
 
 <button onclick="spin()">Girar</button>
-
-<p id="result"></p>
-
-<div id="cta" style="display:none;">
-  <p>👉 ¿Querés jugar con dinero real?</p>
-  <a href="casinos.html">
-    <button>Ver mejores casinos</button>
-  </a>
-</div>
+<p id="r"></p>
 
 <script>
+let premios=["$0","$10","$50","$100","💥 JACKPOT"];
 
-let premios = ["$0", "$10", "$20", "$50", "$100", "💥 JACKPOT"];
+function spin(){
+  let w=document.getElementById("wheel");
+  let deg=Math.random()*360+720;
+  w.style.transform="rotate("+deg+"deg)";
 
-function spin() {
-  let wheel = document.getElementById("wheel");
-
-  let randomDeg = Math.floor(Math.random() * 360) + 720;
-  wheel.style.transform = "rotate(" + randomDeg + "deg)";
-
-  let resultado = premios[Math.floor(Math.random() * premios.length)];
-
-  setTimeout(() => {
-    document.getElementById("result").innerText = "Resultado: " + resultado;
-    document.getElementById("cta").style.display = "block";
-  }, 2000);
+  setTimeout(()=>{
+    let r=premios[Math.floor(Math.random()*premios.length)];
+    document.getElementById("r").innerText=r;
+  },2000);
 }
-
 </script>
 
 </body>
