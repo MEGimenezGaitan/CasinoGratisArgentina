@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Casino Gratis Argentina | Juegos y Bonos</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
 <style>
 
 /* ===== BODY ===== */
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   background: radial-gradient(circle, #020617, #0f172a);
   color: white;
 }
@@ -22,9 +24,10 @@ header {
   align-items: center;
   padding: 15px 30px;
   background: #020617;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-header h1 {
+header h2 {
   margin: 0;
 }
 
@@ -37,6 +40,22 @@ nav a {
 
 nav a:hover {
   color: #22c55e;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(90deg,#020617,#0f172a);
+}
+
+.hero h1 {
+  font-size: 40px;
+}
+
+.hero button {
+  max-width: 200px;
+  margin: 10px;
 }
 
 /* ===== SECCIONES ===== */
@@ -99,13 +118,29 @@ footer {
 
 <!-- HEADER -->
 <header>
-  <h1>🎰 Casino Gratis AR</h1>
+  <h2>🎰 Casino Gratis AR</h2>
   <nav>
     <a href="index.html">Inicio</a>
+    <a href="slots.html">Slots</a>
     <a href="casinos.html">Casinos</a>
-    <a href="#">Blog</a>
   </nav>
 </header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>🎰 Jugá Gratis y Ganá Experiencia</h1>
+  <p>Probá slots, ruleta y juegos gratis antes de apostar con dinero real</p>
+
+  <a href="slots.html">
+    <button>🎰 Jugar Slots</button>
+  </a>
+
+  <a href="casinos.html">
+    <button style="background:#facc15; color:black;">
+      💰 Ver Mejores Casinos
+    </button>
+  </a>
+</section>
 
 <!-- JUEGOS -->
 <div class="section">
@@ -114,30 +149,21 @@ footer {
   <div class="cards">
 
     <div class="card">
-      <h3>Ruleta</h3>
-      <p>Probá suerte girando la ruleta</p>
-      <a href="ruleta.html"><button>Jugar</button></a>
-
-      <p style="margin-top:15px;">👉 ¿Querés jugar con dinero real?</p>
-      <a href="casinos.html"><button>Ver mejores casinos</button></a>
-    </div>
-
-    <div class="card">
-      <h3>Rasca y Gana</h3>
-      <p>Descubrí premios ocultos</p>
-      <a href="rasca.html"><button>Jugar</button></a>
-
-      <p style="margin-top:15px;">👉 ¿Querés jugar con dinero real?</p>
-      <a href="casinos.html"><button>Ver mejores casinos</button></a>
-    </div>
-
-    <div class="card">
-      <h3>Slots Demo</h3>
+      <h3>🎰 Slots</h3>
       <p>Simulación estilo tragamonedas</p>
       <a href="slots.html"><button>Jugar</button></a>
+    </div>
 
-      <p style="margin-top:15px;">👉 ¿Querés jugar con dinero real?</p>
-      <a href="casinos.html"><button>Ver mejores casinos</button></a>
+    <div class="card">
+      <h3>🎡 Ruleta</h3>
+      <p>Probá suerte girando la ruleta</p>
+      <a href="ruleta.html"><button>Jugar</button></a>
+    </div>
+
+    <div class="card">
+      <h3>🎟️ Rasca y Gana</h3>
+      <p>Descubrí premios ocultos</p>
+      <a href="rasca.html"><button>Jugar</button></a>
     </div>
 
   </div>
@@ -145,13 +171,14 @@ footer {
 
 <!-- CASINOS -->
 <div class="section">
-  <h2>💰 Mejores Casinos Online</h2>
+  <h2>🏆 Mejores Casinos Online</h2>
 
   <div class="cards">
 
     <div class="card">
-      <h3>🏆 Casino Recomendado</h3>
+      <h3>🥇 Casino Top</h3>
       <p>🎁 Bono 100% hasta $100.000</p>
+      <p>⚡ Retiros rápidos</p>
       <p>⭐⭐⭐⭐⭐</p>
       <a href="casinos.html"><button>Jugar ahora</button></a>
     </div>
@@ -159,6 +186,7 @@ footer {
     <div class="card">
       <h3>🔥 Casino Popular</h3>
       <p>🎁 Bono 200% + Free Spins</p>
+      <p>🎰 Juegos tipo slots</p>
       <p>⭐⭐⭐⭐</p>
       <a href="casinos.html"><button>Jugar ahora</button></a>
     </div>
@@ -166,15 +194,35 @@ footer {
   </div>
 </div>
 
-<!-- GUIAS -->
+<!-- CONFIANZA -->
 <div class="section">
-  <h2>🧠 Guías</h2>
-  <p>Próximamente estrategias, tips y mejores slots estilo Pragmatic Play</p>
+  <h2>🔒 ¿Por qué elegirnos?</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>🎮 Juegos Gratis</h3>
+      <p>Probá sin riesgo antes de apostar</p>
+    </div>
+
+    <div class="card">
+      <h3>💰 Mejores Bonos</h3>
+      <p>Seleccionamos los casinos con mejores promociones</p>
+    </div>
+
+    <div class="card">
+      <h3>✅ 100% Seguro</h3>
+      <p>Solo recomendamos plataformas confiables</p>
+    </div>
+
+  </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <p>+18 | Juego responsable | Este sitio es solo entretenimiento</p>
+  <p>+18 | Juego responsable</p>
+  <p>Este sitio es solo para entretenimiento</p>
+  <p>© 2026 Casino Gratis AR</p>
 </footer>
 
 </body>
