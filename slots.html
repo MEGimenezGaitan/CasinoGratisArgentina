@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Slots Gratis</title>
+<title>Slots Gratis PRO</title>
 
 <style>
 body {
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   text-align: center;
-  background: #0f172a;
+  background: radial-gradient(circle, #020617, #0f172a);
   color: white;
 }
 
@@ -19,38 +19,41 @@ h1 {
 .slot {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   margin: 30px;
 }
 
 .reel {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   background: #1e293b;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
-  border: 2px solid white;
+  font-size: 35px;
+  border: 3px solid #22c55e;
+  box-shadow: 0 0 10px rgba(34,197,94,0.5);
 }
 
 button {
-  padding: 10px 20px;
+  padding: 12px 25px;
   background: linear-gradient(45deg, #22c55e, #16a34a);
   border: none;
   color: white;
   cursor: pointer;
   border-radius: 5px;
   font-weight: bold;
-}
-
-button:hover {
-  opacity: 0.9;
+  font-size: 16px;
 }
 
 #result {
   margin-top: 20px;
+  font-size: 20px;
+}
+
+#credits {
+  margin-top: 10px;
   font-size: 18px;
 }
 
@@ -59,8 +62,9 @@ button:hover {
 
 <body>
 
-<h1>🎰 Slots Gratis</h1>
-<p>Probá suerte en este tragamonedas</p>
+<h1>🎰 Slots PRO</h1>
+
+<p id="credits">Créditos: $500</p>
 
 <div class="slot">
   <div class="reel" id="r1">❓</div>
@@ -68,7 +72,7 @@ button:hover {
   <div class="reel" id="r3">❓</div>
 </div>
 
-<button onclick="spin()">Girar</button>
+<button onclick="spin()">Girar ($50)</button>
 
 <p id="result"></p>
 
@@ -82,12 +86,26 @@ button:hover {
 <script>
 
 let simbolos = ["🍒","🍋","🍉","⭐","💎","7️⃣"];
+let creditos = 500;
+
+function actualizarCreditos() {
+  document.getElementById("credits").innerText = "Créditos: $" + creditos;
+}
 
 function randomSimbolo() {
   return simbolos[Math.floor(Math.random() * simbolos.length)];
 }
 
 function spin() {
+
+  if (creditos < 50) {
+    document.getElementById("result").innerText = "Sin créditos 😢";
+    return;
+  }
+
+  creditos -= 50;
+  actualizarCreditos();
+
   document.getElementById("cta").style.display = "none";
   document.getElementById("result").innerText = "";
 
@@ -95,7 +113,7 @@ function spin() {
   let r2 = document.getElementById("r2");
   let r3 = document.getElementById("r3");
 
-  let vueltas = 10;
+  let vueltas = 15;
   let i = 0;
 
   let intervalo = setInterval(() => {
@@ -118,7 +136,7 @@ function spin() {
       evaluar(s1, s2, s3);
     }
 
-  }, 100);
+  }, 80);
 }
 
 function evaluar(a, b, c) {
@@ -126,19 +144,26 @@ function evaluar(a, b, c) {
 
   if (a === b && b === c) {
     if (a === "7️⃣") {
-      resultado = "💥 JACKPOT $1000";
+      creditos += 1000;
+      resultado = "💥 JACKPOT +$1000";
     } else {
-      resultado = "🎉 Ganaste $200";
+      creditos += 200;
+      resultado = "🎉 Ganaste +$200";
     }
   } else if (a === b || b === c || a === c) {
-    resultado = "👍 Ganaste $50";
+    creditos += 50;
+    resultado = "👍 Recuperaste +$50";
   } else {
-    resultado = "😢 Intenta de nuevo";
+    resultado = "😢 Perdiste";
   }
 
+  actualizarCreditos();
   document.getElementById("result").innerText = resultado;
   document.getElementById("cta").style.display = "block";
 }
+
+// inicial
+actualizarCreditos();
 
 </script>
 
