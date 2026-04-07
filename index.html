@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name="google-site-verification" content="v6I7DIq-lJJ19kaAGh964Ey_DNFtV2rJEKufFkmw4Dc" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Casino Gratis Argentina | Juegos y Bonos</title>
@@ -16,6 +15,7 @@ body {
   color: white;
 }
 
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
@@ -23,22 +23,23 @@ header {
   background: #020617;
 }
 
-nav a {
-  margin: 0 10px;
-  color: #38bdf8;
-  text-decoration: none;
-}
-
+/* HERO */
 .hero {
   text-align: center;
   padding: 60px 20px;
 }
 
+.hero h1 {
+  font-size: 36px;
+}
+
+/* SECTIONS */
 .section {
   padding: 40px;
   text-align: center;
 }
 
+/* CARDS */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -51,16 +52,28 @@ nav a {
   padding: 20px;
   border-radius: 10px;
   width: 220px;
+  transition: 0.2s;
 }
 
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* BUTTON */
 button {
-  padding: 10px;
-  background: #22c55e;
+  padding: 12px;
+  background: linear-gradient(45deg, #22c55e, #16a34a);
   border: none;
   color: white;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: bold;
 }
+
+button:hover {
+  opacity: 0.9;
+}
+
 </style>
 </head>
 
@@ -75,11 +88,17 @@ button {
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <h1>🎰 Jugá Gratis y Ganá Experiencia</h1>
-  <a href="slots.html"><button>Jugar Slots</button></a>
+  <p>+1.000 jugadores ya probaron nuestros juegos</p>
+
+  <a href="slots.html">
+    <button>🎰 Jugar Gratis Ahora</button>
+  </a>
 </section>
 
+<!-- JUEGOS -->
 <div class="section">
   <h2>🎮 Juegos</h2>
 
@@ -101,6 +120,33 @@ button {
   </div>
 </div>
 
+<!-- CASINOS (CLAVE $$$) -->
+<div class="section">
+  <h2>🏆 Mejores Casinos Online</h2>
+
+  <div class="cards">
+
+    <div class="card" style="border:2px solid gold;">
+      <h3>🥇 TOP CASINO</h3>
+      <p>🎁 Bono 100% hasta $100.000</p>
+      <p>⚡ Retiros rápidos</p>
+      <button onclick="window.location.href='redirect.html'">
+        🎰 Jugar ahora
+      </button>
+    </div>
+
+    <div class="card">
+      <h3>🔥 CASINO POPULAR</h3>
+      <p>🎁 Bono 200% + Free Spins</p>
+      <button onclick="window.location.href='redirect.html'">
+        🎰 Jugar ahora
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- GUIAS SEO -->
 <div class="section">
   <h2>📚 Guías</h2>
   <a href="mejores-casinos-argentina.html">Mejores casinos</a><br>
@@ -110,6 +156,7 @@ button {
 
 <footer style="text-align:center; padding:20px;">
   <p>+18 | Juego responsable</p>
+  <p>Este sitio puede recibir comisiones por afiliados</p>
 </footer>
 
 </body>
