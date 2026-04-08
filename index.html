@@ -14,6 +14,17 @@ body {
   text-align: center;
 }
 
+/* MONEDAS */
+.coins {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  background: #111827;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
 /* HERO */
 .hero {
   padding: 80px 20px;
@@ -46,26 +57,17 @@ body {
   100% { transform: scale(1); }
 }
 
-/* MONEDAS */
-.coins {
-  position: fixed;
-  top: 10px;
-  right: 20px;
-  background: #111827;
-  padding: 10px 15px;
-  border-radius: 10px;
-  font-weight: bold;
-}
-
-/* CARDS */
+/* SECCIONES */
 .section {
   padding: 40px;
 }
 
+/* CARDS */
 .cards {
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -89,6 +91,13 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* BOTÓN REAL */
+.real-btn {
+  background: gold;
+  color: black;
+  font-weight: bold;
+}
 </style>
 </head>
 
@@ -103,8 +112,20 @@ button {
   <p>+1000 jugadores ya están jugando</p>
 
   <a href="slots.html">
-    <button class="cta-btn">🎰 Jugar ahora</button>
+    <button class="cta-btn">🎰 Jugar y ganar monedas</button>
   </a>
+
+  <br><br>
+
+  <button class="real-btn" onclick="window.location.href='redirect.html'">
+    💰 Jugar con dinero real
+  </button>
+
+  <!-- ACTIVIDAD -->
+  <div style="margin-top:20px;">
+    <p style="opacity:0.7;">🔥 Jugadores online: 128</p>
+    <p style="opacity:0.7;">💰 Último ganador: $250</p>
+  </div>
 </div>
 
 <!-- JUEGOS -->
@@ -129,24 +150,42 @@ button {
   </div>
 </div>
 
+<!-- MISIÓN -->
+<div class="section">
+  <h2>🎯 Misión del día</h2>
+  <p>Jugá 5 veces y ganá +50 monedas</p>
+</div>
+
+<!-- RANKING -->
+<div class="section">
+  <h2>🏆 Top jugadores</h2>
+  <p>🥇 Usuario123 - 1200 monedas</p>
+  <p>🥈 PlayerX - 950 monedas</p>
+  <p>🥉 GamerPro - 800 monedas</p>
+</div>
+
 <!-- CASINOS -->
 <div class="section">
   <h2>🏆 Mejores Casinos</h2>
 
   <div class="cards">
     <div class="card" style="border:2px solid gold;">
-      <h3>🥇 TOP</h3>
+      <h3>🥇 TOP CASINO</h3>
       <p>Bono hasta $100.000</p>
       <button onclick="window.location.href='redirect.html'">
-        Jugar real
+        🎰 Jugar ahora
       </button>
     </div>
   </div>
 </div>
 
+<footer style="padding:20px;">
+  <p>+18 | Juego responsable</p>
+</footer>
+
 <script>
 
-// 💰 SISTEMA DE MONEDAS (GLOBAL)
+// 💰 SISTEMA DE MONEDAS
 let coins = localStorage.getItem("coins");
 
 if(!coins){
