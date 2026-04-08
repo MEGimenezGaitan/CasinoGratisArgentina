@@ -44,14 +44,17 @@ button {
 
 <script>
 
+// 💰 MONEDAS (ARREGLADO)
 let coins = parseInt(localStorage.getItem("coins")) || 100;
-document.getElementById("coins").innerText = "💰 " + coins;
 
 function update(){
   localStorage.setItem("coins", coins);
   document.getElementById("coins").innerText = "💰 " + coins;
 }
 
+update();
+
+// 🎡 SPIN
 function spin(){
 
   if(coins < 10){
