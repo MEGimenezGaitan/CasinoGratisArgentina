@@ -1,49 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name="google-site-verification" content="v6I7DIq-lJJ19kaAGh964Ey_DNFtV2rJEKufFkmw4Dc" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Casino Gratis Argentina | Juegos y Bonos</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<title>Casino Gratis Argentina</title>
 
 <style>
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle, #020617, #0f172a);
+  font-family: Arial;
+  background: radial-gradient(circle,#020617,#0f172a);
   color: white;
-}
-
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 30px;
-  background: #020617;
+  text-align: center;
 }
 
 /* HERO */
 .hero {
-  text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
 }
 
 .hero h1 {
-  font-size: 36px;
+  font-size: 40px;
 }
 
-/* SECTIONS */
-.section {
-  padding: 40px;
-  text-align: center;
+.hero p {
+  opacity: 0.8;
+}
+
+/* BOTÓN */
+.cta-btn {
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: linear-gradient(45deg,#22c55e,#16a34a);
+  border: none;
+  color: white;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* MONEDAS */
+.coins {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  background: #111827;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
 /* CARDS */
+.section {
+  padding: 40px;
+}
+
 .cards {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
@@ -52,7 +72,7 @@ header {
   background: #1e293b;
   padding: 20px;
   border-radius: 10px;
-  width: 220px;
+  width: 200px;
   transition: 0.2s;
 }
 
@@ -60,48 +80,32 @@ header {
   transform: scale(1.05);
 }
 
-/* BUTTON */
 button {
-  padding: 12px;
-  background: linear-gradient(45deg, #22c55e, #16a34a);
+  margin-top: 10px;
+  padding: 10px;
+  background: #22c55e;
   border: none;
   color: white;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
 }
-
-button:hover {
-  opacity: 0.9;
-}
-
 </style>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7127073207220817"
-     crossorigin="anonymous"></script>
-     
 </head>
 
 <body>
 
-<header>
-  <h2>🎰 Casino Gratis AR</h2>
-  <nav>
-    <a href="index.html">Inicio</a>
-    <a href="slots.html">Slots</a>
-    <a href="casinos.html">Casinos</a>
-  </nav>
-</header>
+<!-- MONEDAS -->
+<div class="coins" id="coins">💰 100</div>
 
 <!-- HERO -->
-<section class="hero">
-  <h1>🎰 Jugá Gratis y Ganá Experiencia</h1>
-  <p>+1.000 jugadores ya probaron nuestros juegos</p>
+<div class="hero">
+  <h1>🎰 Ganá monedas jugando gratis</h1>
+  <p>+1000 jugadores ya están jugando</p>
 
   <a href="slots.html">
-    <button>🎰 Jugar Gratis Ahora</button>
+    <button class="cta-btn">🎰 Jugar ahora</button>
   </a>
-</section>
+</div>
 
 <!-- JUEGOS -->
 <div class="section">
@@ -125,44 +129,34 @@ button:hover {
   </div>
 </div>
 
-<!-- CASINOS (CLAVE $$$) -->
+<!-- CASINOS -->
 <div class="section">
-  <h2>🏆 Mejores Casinos Online</h2>
+  <h2>🏆 Mejores Casinos</h2>
 
   <div class="cards">
-
     <div class="card" style="border:2px solid gold;">
-      <h3>🥇 TOP CASINO</h3>
-      <p>🎁 Bono 100% hasta $100.000</p>
-      <p>⚡ Retiros rápidos</p>
+      <h3>🥇 TOP</h3>
+      <p>Bono hasta $100.000</p>
       <button onclick="window.location.href='redirect.html'">
-        🎰 Jugar ahora
+        Jugar real
       </button>
     </div>
-
-    <div class="card">
-      <h3>🔥 CASINO POPULAR</h3>
-      <p>🎁 Bono 200% + Free Spins</p>
-      <button onclick="window.location.href='redirect.html'">
-        🎰 Jugar ahora
-      </button>
-    </div>
-
   </div>
 </div>
 
-<!-- GUIAS SEO -->
-<div class="section">
-  <h2>📚 Guías</h2>
-  <a href="mejores-casinos-argentina.html">Mejores casinos</a><br>
-  <a href="slots.html">Slots gratis</a><br>
-  <a href="ruleta-online.html">Ruleta online</a>
-</div>
+<script>
 
-<footer style="text-align:center; padding:20px;">
-  <p>+18 | Juego responsable</p>
-  <p>Este sitio puede recibir comisiones por afiliados</p>
-</footer>
+// 💰 SISTEMA DE MONEDAS (GLOBAL)
+let coins = localStorage.getItem("coins");
+
+if(!coins){
+  coins = 100;
+  localStorage.setItem("coins", coins);
+}
+
+document.getElementById("coins").innerText = "💰 " + coins;
+
+</script>
 
 </body>
 </html>
