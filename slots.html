@@ -1,130 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Slots PRO</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  text-align: center;
-  background: radial-gradient(circle,#020617,#0f172a);
-  color: white;
-}
-
-/* SLOT */
-.slot-machine {
-  background: #111827;
-  border-radius: 20px;
-  padding: 20px;
-  width: 320px;
-  margin: 40px auto;
-  box-shadow: 0 0 25px rgba(0,0,0,0.8);
-}
-
-/* REELS */
-.reels {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.reel {
-  width: 80px;
-  height: 120px;
-  overflow: hidden;
-  background: black;
-  border-radius: 10px;
-  border: 3px solid #22c55e;
-}
-
-.reel-inner {
-  display: flex;
-  flex-direction: column;
-  transition: transform 1s ease-out;
-}
-
-.symbol {
-  height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-}
-
-/* BOTÓN */
-button {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background: linear-gradient(45deg,#22c55e,#16a34a);
-  border: none;
-  color: white;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* WIN GLOW */
-.win {
-  animation: glow 0.5s infinite alternate;
-}
-
-@keyframes glow {
-  from { box-shadow: 0 0 10px gold; }
-  to { box-shadow: 0 0 30px gold; }
-}
-
-/* FLASH */
-.flash {
-  animation: flash 0.3s 3;
-}
-
-@keyframes flash {
-  0% { background:#020617; }
-  50% { background:gold; }
-  100% { background:#020617; }
-}
-
-</style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7127073207220817"
-     crossorigin="anonymous"></script>
-</head>
-
-<body>
-
-<h1>🎰 Slots PRO</h1>
-<p id="credits">Créditos: 200</p>
-
-<div class="slot-machine">
-
-  <div class="reels">
-    <div class="reel"><div class="reel-inner" id="r1"></div></div>
-    <div class="reel"><div class="reel-inner" id="r2"></div></div>
-    <div class="reel"><div class="reel-inner" id="r3"></div></div>
-  </div>
-
-  <button onclick="spin()">GIRAR</button>
-
-</div>
-
-<p id="result"></p>
-
-<div id="cta" style="display:none;">
-  <p>🔥 Estás muy cerca de ganar en serio</p>
-  <button onclick="window.location.href='redirect.html'">
-    🎰 Ir al casino
-  </button>
-</div>
-
-<!-- 🔊 SONIDOS -->
-<audio id="spinSound" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"></audio>
-<audio id="winSound" src="https://assets.mixkit.co/active_storage/sfx/1998/1998-preview.mp3"></audio>
-
 <script>
 
 let symbols = ["🍒","🍋","🍉","⭐","💎","7️⃣"];
-let credits = 200;
+let credits = parseInt(localStorage.getItem("coins")) || 100;
+
+function updateCoins(){
+  localStorage.setItem("coins", credits);
+  document.getElementById("credits").innerText = "Créditos: " + credits;
+}
 
 function createReel(id){
   let reel = document.getElementById(id);
@@ -139,26 +21,24 @@ function createReel(id){
 }
 
 ["r1","r2","r3"].forEach(createReel);
+updateCoins();
 
 function spin(){
 
-  // 🔊 sonido giro
   document.getElementById("spinSound").currentTime = 0;
   document.getElementById("spinSound").play();
 
   if(credits < 20){
-    document.getElementById("result").innerText = "😢 Sin créditos";
+    document.getElementById("result").innerText = "😢 Sin monedas";
     document.getElementById("cta").style.display = "block";
     return;
   }
 
   credits -= 20;
-  document.getElementById("credits").innerText = "Créditos: " + credits;
+  updateCoins();
 
   ["r1","r2","r3"].forEach((id,i)=>{
-
     let reel = document.getElementById(id);
-
     createReel(id);
 
     let pos = Math.floor(Math.random()*10);
@@ -174,7 +54,7 @@ function spin(){
     let r2 = symbols[Math.floor(Math.random()*symbols.length)];
     let r3 = symbols[Math.floor(Math.random()*symbols.length)];
 
-    // 💥 CASI GANAR
+    // casi ganar
     if(Math.random() < 0.4){
       r1 = "💎";
       r2 = "💎";
@@ -184,45 +64,27 @@ function spin(){
 
     if(r1 === r2 && r2 === r3){
       credits += 150;
-      result = "💥 JACKPOT!";
-      document.querySelector(".slot-machine").classList.add("win");
-
-      // 🔊 sonido victoria
-      document.getElementById("winSound").currentTime = 0;
+      result = "💥 JACKPOT! +150";
       document.getElementById("winSound").play();
-
-      // 💡 flash
       document.body.classList.add("flash");
-
-      setTimeout(()=>{
-        document.body.classList.remove("flash");
-      },1000);
-
+      setTimeout(()=> document.body.classList.remove("flash"), 1000);
     }
     else if(r1 === r2 || r2 === r3){
       credits += 40;
-      result = "💰 Ganaste algo!";
+      result = "💰 Ganaste +40";
     }
     else{
-      result = "😢 Casi ganas... probá con dinero real 🔥";
+      result = "😢 Casi ganas...";
     }
 
+    updateCoins();
     document.getElementById("result").innerText = result;
-    document.getElementById("credits").innerText = "Créditos: " + credits;
-
-    setTimeout(()=>{
-      document.querySelector(".slot-machine").classList.remove("win");
-    },1000);
 
     if(credits < 50){
       document.getElementById("cta").style.display = "block";
     }
 
   },2000);
-
 }
 
 </script>
-
-</body>
-</html>

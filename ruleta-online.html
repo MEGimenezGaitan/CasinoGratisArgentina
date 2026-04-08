@@ -2,28 +2,91 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Ruleta Online Gratis</title>
+<title>Ruleta</title>
 
-<meta name="description" content="Jugá ruleta online gratis sin registrarte. Probá suerte y aprendé estrategias.">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7127073207220817"
-     crossorigin="anonymous"></script>
+<style>
+body {
+  text-align:center;
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+}
+
+.wheel {
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  border:5px solid white;
+  margin:30px auto;
+  transition: transform 3s ease-out;
+}
+
+button {
+  padding:10px;
+  background:#22c55e;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+</style>
 </head>
 
 <body>
 
-<h1>🎡 Ruleta Online Gratis</h1>
+<h1>🎡 Ruleta</h1>
+<p id="coins"></p>
 
-<p>La ruleta es uno de los juegos más populares de casino. Podés jugar gratis y practicar.</p>
+<div class="wheel" id="wheel"></div>
 
-<h2>🎯 Cómo jugar</h2>
-<p>Elegís un número o color y girás la rueda.</p>
+<button onclick="spin()">Girar</button>
 
-<h2>💡 Consejos</h2>
-<p>Gestioná bien tus apuestas y jugá de forma responsable.</p>
+<p id="result"></p>
 
-<a href="ruleta.html">
-<button>Jugar ruleta</button>
-</a>
+<script>
+
+let coins = parseInt(localStorage.getItem("coins")) || 100;
+document.getElementById("coins").innerText = "💰 " + coins;
+
+function update(){
+  localStorage.setItem("coins", coins);
+  document.getElementById("coins").innerText = "💰 " + coins;
+}
+
+function spin(){
+
+  if(coins < 10){
+    document.getElementById("result").innerText = "😢 Sin monedas";
+    return;
+  }
+
+  coins -= 10;
+  update();
+
+  let deg = Math.floor(Math.random()*360) + 720;
+  document.getElementById("wheel").style.transform = "rotate("+deg+"deg)";
+
+  setTimeout(()=>{
+
+    let win = Math.random();
+
+    if(win < 0.1){
+      coins += 100;
+      document.getElementById("result").innerText = "💥 +100";
+    }
+    else if(win < 0.3){
+      coins += 30;
+      document.getElementById("result").innerText = "💰 +30";
+    }
+    else{
+      document.getElementById("result").innerText = "😢 Perdiste";
+    }
+
+    update();
+
+  },3000);
+}
+
+</script>
 
 </body>
 </html>
