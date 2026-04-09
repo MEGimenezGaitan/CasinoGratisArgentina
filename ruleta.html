@@ -1,49 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+<meta charset="UTF-8">
+<title>Ruleta</title>
+
 <style>
-#wheel {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  margin: 30px auto;
-  background: conic-gradient(
-    red 0deg 60deg,
-    green 60deg 120deg,
-    red 120deg 180deg,
-    green 180deg 240deg,
-    red 240deg 300deg,
-    gold 300deg 360deg
-  );
-  transition: 2s;
+body {
+  text-align:center;
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+}
+
+.wheel {
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  border:5px solid white;
+  margin:30px auto;
+  transition: transform 3s ease-out;
+}
+
+button {
+  padding:10px;
+  background:#22c55e;
+  border:none;
+  color:white;
+  cursor:pointer;
 }
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7127073207220817"
-     crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-<h1>Ruleta</h1>
-<div>⬇️</div>
-<div id="wheel"></div>
+<h1>🎡 Ruleta</h1>
+<p id="coins"></p>
+
+<div class="wheel" id="wheel"></div>
 
 <button onclick="spin()">Girar</button>
-<p id="r"></p>
+
+<p id="result"></p>
 
 <script>
-let premios=["$0","$10","$50","$100","💥 JACKPOT"];
 
+// 💰 MONEDAS (ARREGLADO)
+let coins = parseInt(localStorage.getItem("coins")) || 100;
+
+function update(){
+  localStorage.setItem("coins", coins);
+  document.getElementById("coins").innerText = "💰 " + coins;
+}
+
+update();
+
+// 🎡 SPIN
 function spin(){
-  let w=document.getElementById("wheel");
-  let deg=Math.random()*360+720;
-  w.style.transform="rotate("+deg+"deg)";
+
+  if(coins < 10){
+    document.getElementById("result").innerText = "😢 Sin monedas";
+    return;
+  }
+
+  coins -= 10;
+  update();
+
+  let deg = Math.floor(Math.random()*360) + 720;
+  document.getElementById("wheel").style.transform = "rotate("+deg+"deg)";
 
   setTimeout(()=>{
-    let r=premios[Math.floor(Math.random()*premios.length)];
-    document.getElementById("r").innerText=r;
-  },2000);
+
+    let win = Math.random();
+
+    if(win < 0.1){
+      coins += 100;
+      document.getElementById("result").innerText = "💥 +100";
+    }
+    else if(win < 0.3){
+      coins += 30;
+      document.getElementById("result").innerText = "💰 +30";
+    }
+    else{
+      document.getElementById("result").innerText = "😢 Perdiste";
+    }
+
+    update();
+
+  },3000);
 }
+
 </script>
 
 </body>
