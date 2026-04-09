@@ -13,12 +13,20 @@ body {
 }
 
 .wheel {
-  width:200px;
-  height:200px;
-  border-radius:50%;
-  border:5px solid white;
-  margin:30px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 6px solid gold;
+  margin: 30px auto;
   transition: transform 3s ease-out;
+  background: conic-gradient(
+    red 0deg 60deg,
+    green 60deg 120deg,
+    red 120deg 180deg,
+    green 180deg 240deg,
+    red 240deg 300deg,
+    gold 300deg 360deg
+  );
 }
 
 button {
@@ -34,6 +42,7 @@ button {
 <body>
 
 <h1>🎡 Ruleta</h1>
+<div style="font-size:30px;">⬇️</div>
 <p id="coins"></p>
 
 <div class="wheel" id="wheel"></div>
