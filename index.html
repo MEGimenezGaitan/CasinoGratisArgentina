@@ -65,13 +65,17 @@ body {
   background: #1e293b;
   padding: 20px;
   border-radius: 10px;
-  width: 200px;
+  width: 220px;
 }
 
 .real-btn {
   background: gold;
   color: black;
   font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>
 </head>
@@ -83,7 +87,6 @@ body {
 <div class="hero">
   <h1>🎰 CASINO GRATIS ARGENTINA</h1>
 
-  <!-- NUEVO MENSAJE CONFIANZA -->
   <p style="color:#22c55e;">✔ Sin registro ✔ Sin depósito ✔ Gratis</p>
 
   <p>💸 Te regalamos 1000 monedas GRATIS todos los días</p>
@@ -92,17 +95,15 @@ body {
   <!-- 👀 VISITAS -->
   <p id="visits">👀 Cargando visitas...</p>
 
-  <!-- BOTÓN MEJORADO -->
   <a href="slots.html">
     <button class="cta-btn">🔥 PROBAR SLOT GRATIS (1000 monedas)</button>
   </a>
 
-  <!-- URGENCIA -->
   <p style="color:orange;">⏳ Oferta activa por tiempo limitado</p>
 
   <br>
 
-  <button class="real-btn" onclick="window.location.href='redirect.html'">
+  <button class="real-btn" onclick="goReal()">
     💰 GANAR DINERO REAL AHORA
   </button>
 
@@ -112,6 +113,7 @@ body {
   </div>
 </div>
 
+<!-- JUEGOS -->
 <div class="section">
   <h2>🎮 Juegos</h2>
 
@@ -131,6 +133,29 @@ body {
       <a href="rasca.html"><button>Jugar</button></a>
     </div>
   </div>
+</div>
+
+<!-- 💰 DINERO REAL -->
+<div class="section">
+
+  <h2>💰 Jugar con dinero real</h2>
+
+  <div class="cards">
+
+    <div class="card" style="border:2px solid gold;">
+      <h3>🔥 Casino recomendado</h3>
+      <p>Bono de bienvenida hasta $100.000</p>
+      <p>✔ Retiros rápidos</p>
+      <p>✔ Disponible en Argentina</p>
+      <p style="color:orange;">⏳ Cupos limitados hoy</p>
+
+      <button class="real-btn" onclick="goReal()">
+        🎰 JUGAR AHORA
+      </button>
+    </div>
+
+  </div>
+
 </div>
 
 <footer style="padding:20px;">
@@ -166,6 +191,11 @@ fetch("https://api.countapi.xyz/hit/martin-casino-2026/visits")
     document.getElementById("visits").innerText =
       "👀 Muchas personas están entrando ahora 🔥";
   });
+
+// 💰 REDIRECT
+function goReal(){
+  window.location.href = "redirect.html";
+}
 
 </script>
 
