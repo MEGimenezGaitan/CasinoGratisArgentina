@@ -82,17 +82,25 @@ body {
 
 <div class="hero">
   <h1>🎰 CASINO GRATIS ARGENTINA</h1>
+
+  <!-- NUEVO MENSAJE CONFIANZA -->
+  <p style="color:#22c55e;">✔ Sin registro ✔ Sin depósito ✔ Gratis</p>
+
   <p>💸 Te regalamos 1000 monedas GRATIS todos los días</p>
   <p>Jugá sin riesgo y probá suerte como en un casino real</p>
 
   <!-- 👀 VISITAS -->
   <p id="visits">👀 Cargando visitas...</p>
 
+  <!-- BOTÓN MEJORADO -->
   <a href="slots.html">
-    <button class="cta-btn">🎰 JUGAR GRATIS AHORA</button>
+    <button class="cta-btn">🔥 PROBAR SLOT GRATIS (1000 monedas)</button>
   </a>
 
-  <br><br>
+  <!-- URGENCIA -->
+  <p style="color:orange;">⏳ Oferta activa por tiempo limitado</p>
+
+  <br>
 
   <button class="real-btn" onclick="window.location.href='redirect.html'">
     💰 GANAR DINERO REAL AHORA
@@ -100,7 +108,7 @@ body {
 
   <div style="margin-top:20px;">
     <p id="players">🔥 120 personas jugando ahora</p>
-    <p style="opacity:0.7;">💰 Último retiro: $250 hace 2 min</p>
+    <p style="opacity:0.7;">💰 Última ganancia: $12.450 hace 1 min</p>
   </div>
 </div>
 
@@ -147,12 +155,16 @@ setInterval(() => {
   document.getElementById("players").innerText = "🔥 " + n + " personas jugando ahora";
 }, 3000);
 
-// 👀 CONTADOR REAL
-fetch("https://api.countapi.xyz/hit/casino-gratis-argentina/visits")
+// 👀 CONTADOR (puede fallar en redes bloqueadas)
+fetch("https://api.countapi.xyz/hit/martin-casino-2026/visits")
   .then(res => res.json())
   .then(data => {
     document.getElementById("visits").innerText =
       "👀 Visitas totales: " + data.value;
+  })
+  .catch(() => {
+    document.getElementById("visits").innerText =
+      "👀 Muchas personas están entrando ahora 🔥";
   });
 
 </script>
